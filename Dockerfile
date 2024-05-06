@@ -1,4 +1,4 @@
-FROM java:7-jre
+FROM openjdk:7-jre
 
 RUN apt-get update && apt-get install -y \
     python
