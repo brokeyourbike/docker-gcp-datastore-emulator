@@ -1,5 +1,4 @@
-#
-name: Create and publish a Docker image
+name: build-and-push
 
 on:
   push:
@@ -16,7 +15,7 @@ jobs:
       contents: read
       packages: write
       attestations: write
-      id-token: write
+      id-token: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
