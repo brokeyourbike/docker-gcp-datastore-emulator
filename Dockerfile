@@ -2,7 +2,8 @@ FROM openjdk:11-jre-slim
 
 RUN apt-get update && apt-get install -y \
     python \
-    wget
+    wget \
+    tini
 
 # install gcloud
 ENV GCLOUD_OBJ=google-cloud-sdk-245.0.0-linux-x86_64.tar.gz
@@ -19,5 +20,8 @@ RUN mkdir gcd
 # configure gcloud
 RUN gcloud config set project emulator
 
+EXPOSE  8432/tcp
+
 # start emulator
+ENTRYPOINT ["tini", "--"]
 CMD ["gcloud", "beta", "emulators", "datastore", "start", "--quiet", "--data-dir", "/mnt/data/gcd", "--host-port", "0.0.0.0:8432"]
