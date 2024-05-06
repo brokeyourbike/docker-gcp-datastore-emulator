@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim-buster
+FROM openjdk:11-jre-slim
 
 RUN apt-get update && apt-get install -y \
     python \
@@ -11,7 +11,7 @@ RUN tar -xf $GCLOUD_OBJ -C /usr/local/
 ENV PATH=/usr/local/google-cloud-sdk/bin:$PATH
 RUN gcloud components install beta cloud-datastore-emulator
 
-# create staging area
+# create data directory
 ADD ./ /mnt/data
 WORKDIR /mnt/data
 RUN mkdir gcd
